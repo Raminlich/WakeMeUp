@@ -18,7 +18,6 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 
 public class LocationService extends Service {
@@ -31,7 +30,7 @@ public class LocationService extends Service {
 
     private boolean isRunning = true; // Flag to control the execution of run()
 
-    private int threshold = 40;
+    private int proximity = 40;
 
     private String locationString;
 
@@ -80,9 +79,9 @@ public class LocationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        // Start the incrementing process when the service is started
         if(intent != null){
             locationString = intent.getStringExtra("location");
+            proximity = intent.getIntExtra("proximity",40);
         }
         double[] targetLoc = convertStringToCoordinates(locationString);
         targetLocation = new Location("destination");
@@ -160,7 +159,7 @@ public class LocationService extends Service {
                         double longitude = location.getLongitude();
                         currentLocationString = latitude + " , " + longitude;
                         double distance = location.distanceTo(targetLocation);
-                        if(distance <= threshold){
+                        if(distance <= proximity){
                             stopForeground(true);
                             PlayRingtone();
                             isRunning = false;

@@ -10,6 +10,7 @@
         android:id="@+id/noticeTextId"
         android:layout_width="396dp"
         android:layout_height="30dp"
+        android:layout_marginBottom="32dp"
         android:text="Nothing interesting is happening!"
         android:textAlignment="center"
         android:textSize="16sp"
@@ -18,51 +19,70 @@
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.399" />
-
-    <Button
-        android:id="@+id/startServiceButtonId"
-        android:layout_width="142dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="80dp"
-        android:layout_marginEnd="160dp"
-        android:text="Start"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noticeTextId" />
+        app:layout_constraintVertical_bias="0.337" />
 
     <EditText
-        android:id="@+id/coordinateEditTextId"
-        android:layout_width="404dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="17dp"
+        android:id="@+id/proximityTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="101dp"
+        android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="Enter your coordinate..."
-        android:inputType="text"
+        android:hint="Enter your proximity..."
+        android:inputType="number"
+        android:numeric="integer"
+        android:text="60"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/startServiceButtonId"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noticeTextId" />
+        app:layout_constraintTop_toBottomOf="@+id/coordinateEditTextId" />
 
     <Button
         android:id="@+id/exitAppId"
-        android:layout_width="79dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="166dp"
-        android:layout_marginBottom="233dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="250dp"
+        android:shadowColor="#000000"
         android:text="Kill"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/startServiceButtonId" />
+        app:layout_constraintTop_toBottomOf="@+id/startServiceButtonId"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/coordinateEditTextId"
+        android:layout_width="404dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="2dp"
+        android:ems="10"
+        android:hint="Enter your coordinate..."
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/proximityTextId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/noticeTextId"
+        app:layout_constraintVertical_bias="0.49" />
+
+    <Button
+        android:id="@+id/startServiceButtonId"
+        android:layout_width="151dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginEnd="160dp"
+        android:layout_marginBottom="10dp"
+        android:text="Start"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/exitAppId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.519"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/proximityTextId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

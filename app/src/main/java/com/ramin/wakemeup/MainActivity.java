@@ -1,4 +1,5 @@
 package com.ramin.wakemeup;
+import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 
@@ -13,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Button killAppButton;
     EditText coordinateInput;
     Intent serviceIntent;
-    boolean isServiceRunning;
+    EditText proximityInputText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         startServiceButton = findViewById(R.id.startServiceButtonId);
         killAppButton = findViewById(R.id.exitAppId);
         coordinateInput = findViewById(R.id.coordinateEditTextId);
+        proximityInputText = findViewById(R.id.proximityTextId);
         SetStartServiceButton();
         SetKillAppButton();
         BroadcastReceiver locationCounterReceiver = new BroadcastReceiver() {
@@ -46,12 +49,19 @@ public class MainActivity extends AppCompatActivity {
         registerReceiver(locationCounterReceiver, filter, Context.RECEIVER_EXPORTED);
     }
 
+    @SuppressLint("SetTextI18n")
     private void SetStartServiceButton(){
         serviceIntent= new Intent(this,LocationService.class);
         if(ServiceUtils.isServiceRunning(this,LocationService.class)){
             startServiceButton.setText("Stop!");
         }
         startServiceButton.setOnClickListener(v -> {
+            String cooText =String.valueOf(coordinateInput.getText());
+            String proxiText = String.valueOf(proximityInputText.getText());
+            if( cooText.length() <= 1 || proxiText.length() <= 1){
+                updateNoticeText("Fields are invalid!");
+                return;
+            }
             if(ServiceUtils.isServiceRunning(this,LocationService.class)){
                 stopService(serviceIntent);
                 startServiceButton.setText("Start");
@@ -59,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             updateNoticeText("Starting service...");
+            String proximityString = String.valueOf(proximityInputText.getText());
+            serviceIntent.putExtra("proximity",Integer.parseInt(proximityString));
             serviceIntent.putExtra("location",coordinateInput.getText().toString());
             startForegroundService(serviceIntent);
             startServiceButton.setText("Stop!");
